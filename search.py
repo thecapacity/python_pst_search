@@ -45,9 +45,9 @@ def write_to_file(msg):
 
     with open("msgs/" + str(msg_counter) + ".txt","wb") as f:
         f.write("Subject: ")
-        f.write(msg.get_subject().encode("UTF-8"))
+        f.write(msg.get_subject())
         f.write("\n\n")
-        f.write(msg.get_plain_text_body().encode("UTF-8"))
+        f.write(msg.get_plain_text_body())
         f.close()
 
     msg_counter = msg_counter + 1
