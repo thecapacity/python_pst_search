@@ -22,6 +22,8 @@ print
 msg_counter = 0
 
 def search_dir(d,path):
+    if not d: return
+
     if d.get_name():
         new_path = path + u"/" + unicode(d.get_name())
     else:
