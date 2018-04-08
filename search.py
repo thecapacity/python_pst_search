@@ -52,16 +52,21 @@ def search_dir(d,path):
     for i in range(0, d.get_number_of_sub_folders()):
         search_dir(d.get_sub_folder(i), new_path)
 
-def write_to_file(msg):
+def write_to_file(msg, output="screen"):
     global msg_counter
 
-    with open("msgs/" + str(msg_counter) + ".txt","wb") as f:
-        f.write("Subject: ")
-        f.write(msg.get_subject())
-        f.write("\n\n")
-        f.write(msg.get_plain_text_body())
-        f.close()
+    if "screen" in output:
+        print "Found: ", msg.get_subject()
+        txt = msg.get_plain_text_body()
+        print txt
+    else:
+        with open("msgs/" + str(msg_counter) + ".txt","wb") as f:
+            f.write("Subject: ")
+            f.write(msg.get_subject())
+            f.write("\n\n")
+            f.write(msg.get_plain_text_body())
+            f.close()
 
-    msg_counter = msg_counter + 1
+        msg_counter = msg_counter + 1
 
 search_dir(pst.get_root_folder(),u"")
