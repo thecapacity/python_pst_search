@@ -21,24 +21,24 @@ print
 
 msg_counter = 0
 
-def search_dir(dir,path):
-    if dir.get_display_name():
-        new_path = path + u"/" + unicode(dir.get_display_name())
+def search_dir(d,path):
+    if d.get_display_name():
+        new_path = path + u"/" + unicode(d.get_display_name())
     else:
         new_path = path
 
     print "Searching ", new_path
 
-    for i in range(0, dir.get_number_of_sub_messages()):
-        msg = dir.get_sub_message(i)
+    for i in range(0, d.get_number_of_sub_messages()):
+        msg = d.get_sub_message(i)
         try:
             if search_term in msg.get_plain_text_body():
                 write_to_file(msg)
         except TypeError:
             pass
 
-    for i in range(0, dir.get_number_of_sub_folders()):
-        search_dir(dir.get_sub_folder(i), new_path)
+    for i in range(0, d.get_number_of_sub_folders()):
+        search_dir(d.get_sub_folder(i), new_path)
 
 def write_to_file(msg):
     global msg_counter
