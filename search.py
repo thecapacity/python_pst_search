@@ -3,6 +3,9 @@
 import pypff
 import sys
 
+from email.utils import parseaddr
+
+
 if len(sys.argv) != 3:
     print "Need to have 2 arguments: <pst file> <search term>"
     sys.exit(1)
@@ -34,8 +37,15 @@ def search_dir(d,path):
     for i in range(0, d.get_number_of_sub_messages()):
         msg = d.get_sub_message(i)
         try:
-            if search_term in msg.get_plain_text_body():
+            #if search_term in msg.get_plain_text_body():
+            #if search_term.lower() in msg.get_sender_name().lower():
+            #if search_term in msg.get_plain_text_body():
+
+            email = parseaddr("".join([l for l in msg.get_transport_headers().split() if "@" in l and ".com" in l]))[1] #FIX: this .com is a quick hack to cut down on some of the bad headers
+
+            if search_term.lower() in email.lower():
                 write_to_file(msg)
+
         except TypeError:
             pass
 
