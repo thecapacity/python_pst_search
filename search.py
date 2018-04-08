@@ -42,12 +42,14 @@ def search_dir(d,path):
 
 def write_to_file(msg):
     global msg_counter
-    f = open("msgs/" + str(msg_counter) + ".txt","wb")
-    f.write("Subject: ")
-    f.write(msg.get_subject().encode("UTF-8"))
-    f.write("\n\n")
-    f.write(msg.get_plain_text_body().encode("UTF-8"))
-    f.close()
+
+    with open("msgs/" + str(msg_counter) + ".txt","wb") as f:
+        f.write("Subject: ")
+        f.write(msg.get_subject().encode("UTF-8"))
+        f.write("\n\n")
+        f.write(msg.get_plain_text_body().encode("UTF-8"))
+        f.close()
+
     msg_counter = msg_counter + 1
 
 search_dir(pst.get_root_folder(),u"")
