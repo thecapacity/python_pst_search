@@ -4,8 +4,8 @@ import pypff
 import sys
 
 if len(sys.argv) != 3:
-	print "Need to have 2 arguments: <pst file> <search term>"
-	sys.exit(1)
+    print "Need to have 2 arguments: <pst file> <search term>"
+    sys.exit(1)
 
 pst_file = sys.argv[1] 
 search_term = sys.argv[2]
